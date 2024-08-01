@@ -1,6 +1,7 @@
 class StringCalculator
 
 	def add(numbers)
+		numbers = numbers.to_s
 		return 0 if numbers.empty?
 		# The best way to extract only digits from given input but as per the requirement I am checking delimeter
 		# numbers = numbers.tr("^0-9","")
