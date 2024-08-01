@@ -9,6 +9,14 @@ RSpec.describe StringCalculator do
       expect(calculator.add('')).to eq(0)
     end
 
+    it 'returns empty if numbers contains characters' do
+      expect(calculator.add("incubyte2323")).to eq(0)
+    end
+
+    it 'returns the number itself when given integer' do
+      expect(calculator.add(21)).to eq(21)
+    end
+
     it 'returns the number itself when given a single number' do
       expect(calculator.add('2')).to eq(2)
     end
@@ -25,8 +33,19 @@ RSpec.describe StringCalculator do
       expect(calculator.add("1\n2,3")).to eq(6)
     end
 
-    it 'supports different delimiters' do
+    it 'supports different delimiters using ;' do
       expect(calculator.add("//;\n1;2")).to eq(3)
+    end
+
+    it 'handles custom delimiters with special regex characters' do
+      expect(calculator.add("//.\n1.2.3")).to eq(6)
+      expect(calculator.add("//|\n1|2|3")).to eq(6)
+    end
+
+    it 'returns 0 for a string with only delimiters' do
+      expect(calculator.add(',')).to eq(0)
+      expect(calculator.add('\n')).to eq(0)
+      expect(calculator.add(',\n,')).to eq(0)
     end
 
     it 'raises an exception for negative numbers' do
